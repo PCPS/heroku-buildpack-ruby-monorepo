@@ -12,9 +12,6 @@ copy_procfile () {
   	exit 1
   fi
 
-  # replace relative paths (i.e. bin/rails) with absolute ones (such as /app/rails_application/bin/rails)
-  sed -i -r -e "s|(bin/[a-z]+)|/app/${relative_app_dir}/\1|g" "${build_dir}/Procfile"
-
-  # enhance rake with working directory in application
-  sed -i -r -e "s|(bundle exec rake)|\1 -C ${relative_app_dir}|g" "${build_dir}/Procfile"
+  # start tasks in the application directory
+  sed -i -r -e "s#^(\w:)(.+)#\1 cd ${relative_app_dir} \&\&\2#" "${build_dir}/Procfile"
 }
