@@ -13,5 +13,5 @@ copy_procfile () {
   fi
 
   # start tasks in the application directory
-  sed -i -r -e "s#^(\w:)(.+)#\1 cd ${relative_app_dir} \&\&\2#" "${build_dir}/Procfile"
+  sed -i -r -e "s#^(\w+:)(.+)#\1 cd ${relative_app_dir} \&\&\2#" "${build_dir}/Procfile"
 }
